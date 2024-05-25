@@ -1,0 +1,66 @@
+base_model: Qwen/Qwen1.5-7B
+model_type: AutoModelForCausalLM
+tokenizer_type: AutoTokenizer
+load_in_8bit: false
+load_in_4bit: false
+strict: false
+
+datasets:
+  - path: 2A2I-R/AOT-concatenated # change later with the whole dataset concatenated
+    type: completion
+    field: text
+
+dataset_prepared_path: /workspace/dataset/prepared_dataset
+val_set_size: 0
+output_dir: /workspace/model/ArabicQwen-lora
+resume_from_checkpoint:
+hf_use_auth_token: <YOUR_HF_AUTH_TOKEN> # set later
+
+adapter: lora
+lora_model_dir:
+sequence_len: 2048
+sample_packing: true
+pad_to_sequence_len: true
+lora_r: 16
+lora_alpha: 16
+lora_dropout: 0.05
+lora_target_modules: # adapt later
+  - q_proj
+  - v_proj
+lora_fan_in_fan_out:
+lora_modules_to_save:
+  - embed_tokens
+  - lm_head
+
+wandb_project: <YOUR_WANDB_PROJECT> # set later
+wandb_entity: <YOUR_WANDB_ENTITY> # set later
+wandb_log_model: true
+
+gradient_accumulation_steps: 1
+micro_batch_size: 1
+num_epochs: 1
+optimizer: paged_adamw_8bit
+lr_scheduler: cosine
+learning_rate: 0.0002
+train_on_inputs: false
+group_by_length: false
+bf16: true
+fp16: false
+tf32: false
+gradient_checkpointing: true
+logging_steps: 1
+xformers_attention: false
+flash_attention: true
+warmup_steps: 100
+eval_steps: 500
+save_steps: 2000
+save_total_limit: 2
+debug:
+deepspeed: deepspeed_configs/zero3.json
+weight_decay: 0.05
+special_tokens:
+  eos_token: "<|im_end|>"
+tokens:
+  - ""
+
+trust_remote_code: true
