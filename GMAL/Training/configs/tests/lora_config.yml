@@ -15,7 +15,7 @@ dataset_prepared_path: /workspace/dataset/prepared_dataset
 val_set_size: 0
 output_dir: /workspace/model/ArabicQwen-lora
 resume_from_checkpoint:
-hf_use_auth_token: <YOUR_HF_AUTH_TOKEN> # set later
+hf_use_auth_token: "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"
 
 adapter: lora
 lora_model_dir:
@@ -33,8 +33,7 @@ lora_modules_to_save:
   - embed_tokens
   - lm_head
 
-wandb_project: <YOUR_WANDB_PROJECT> # set later
-wandb_entity: <YOUR_WANDB_ENTITY> # set later
+wandb_project: "GMAL-Tests"
 wandb_log_model: true
 
 gradient_accumulation_steps: 1
