@@ -6,7 +6,8 @@ load_in_4bit: false
 strict: false
 
 datasets:
-  - path: 2A2I-R/AOT-concatenated # change later with the whole dataset concatenated
+  # - path: 2A2I-R/AOT-concatenated # change later with the whole dataset concatenated
+  - path: AbderrahmanSkiredj1/moroccan_darija_wikipedia_dataset
     type: completion
     field: text
 
